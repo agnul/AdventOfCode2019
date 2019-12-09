@@ -18,27 +18,27 @@ def run(memory, p_in=1):
         word = str(memory[ip])
         op, modes = word[-2:].zfill(2), word[:-2].zfill(3)
         if op == '01':
-            assert modes[-3] == '0'
+            assert modes[-3] != '1'
             p1, p2, dest = read_p(memory, modes[-1], memory[ip + 1], base), \
                            read_p(memory, modes[-2], memory[ip + 2], base), \
-                           memory[ip + 3]
+                           memory[ip + 3] if modes[-3] == '0' else base + memory[ip + 3]
             write_p(memory, dest, p1 + p2)
             ip += 4
         elif op == '02':
-            assert modes[-3] == '0'
+            assert modes[-3] != '1'
             p1, p2, dest = read_p(memory, modes[-1], memory[ip + 1], base), \
                            read_p(memory, modes[-2], memory[ip + 2], base), \
-                           memory[ip + 3]
+                           memory[ip + 3] if modes[-3] == '0' else base + memory[ip + 3]
             write_p(memory, dest, p1 * p2)
             ip += 4
         elif op == '03':
-            assert modes[-1] == '0'
-            dest = memory[ip + 1]
+            assert modes[-1] != '1'
+            dest = memory[ip + 1] if modes[-1] == '1' else base + memory[ip + 1]
             write_p(memory, dest, p_in)
             ip += 2
         elif op == '04':
             p1 = read_p(memory, modes[-1], memory[ip + 1], base)
-            p_out.append(p1)
+            p_out.append(p1) 
             ip += 2
         elif op == '05':
             p1, p2 = read_p(memory, modes[-1], memory[ip + 1], base), \
@@ -51,13 +51,13 @@ def run(memory, p_in=1):
         elif op == '07':
             p1, p2, dest = read_p(memory, modes[-1], memory[ip + 1], base),  \
                            read_p(memory, modes[-2], memory[ip + 2], base), \
-                           memory[ip + 3]
+                           memory[ip + 3] if modes[-3] == '0' else base + memory[ip + 3]
             write_p(memory, dest, 1 if p1 < p2 else 0)
             ip += 4
         elif op == '08':
             p1, p2, dest = read_p(memory, modes[-1], memory[ip + 1], base), \
                            read_p(memory, modes[-2], memory[ip + 2], base), \
-                           memory[ip + 3]
+                           memory[ip + 3] if modes[-3] == '0' else base + memory[ip + 3]
             write_p(memory, dest, 1 if p1 == p2 else 0)
             ip += 4
         elif op == '09':
@@ -94,11 +94,11 @@ def grow_memory(memory, max_address):
 
 
 def solve_part_1():
-    return run([109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99])
+    return run(load())
 
 
 def solve_part_2():
-    pass
+    return run(load(), 2)
 
 
 if __name__ == '__main__':

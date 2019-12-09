@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5352ee0-1c52-4fff-8dc5-cb4d1f6c7ed1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AdventOfCode2019.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AdventOfCode2019.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/day9/day9.py" beforeDir="false" afterPath="$PROJECT_DIR$/day9/day9.py" afterDir="false" />
-    </list>
+    <list default="true" id="c5352ee0-1c52-4fff-8dc5-cb4d1f6c7ed1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -230,7 +225,7 @@
       <workItem from="1575580304081" duration="7408000" />
       <workItem from="1575664763787" duration="10508000" />
       <workItem from="1575729618955" duration="1667000" />
-      <workItem from="1575902264239" duration="1125000" />
+      <workItem from="1575902264239" duration="1364000" />
     </task>
     <servers />
   </component>
