@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import fileinput
 
+# for y in enumerate(['.#..#', '.....', '#####', '....#', '...##']):
+
 field = dict()
 for y in enumerate(fileinput.input('input.txt')):
-# for y in enumerate(['.#..#', '.....', '#####', '....#', '...##']):
     print(f'{y[1].rstrip()}')
     for x in enumerate(y[1].rstrip()):
         if x[1] == '#':
@@ -28,7 +29,9 @@ def is_in_between(a1, a2, a3):
 
 
 def solve_part_1():
+    max_count, pos = 0, None
     for a in field:
+        count = 0
         for b in field:
             blocked = False
             for c in field:
@@ -38,12 +41,16 @@ def solve_part_1():
                     blocked = True
                     break
             if not blocked and a != b:
+                count += 1
                 field[a].append(b)
-    return max(len(field[a]) for a in field)
+        if count > max_count:
+            max_count, pos = count, a
+    return f'pos: {pos} => {max_count}'
 
 
 def solve_part_2():
-    pass
+    for a in field:
+        field[a].sort(key=lambda b: (b[1] - a[1]) ** 2 + (b[0] - a[0]) ** 2)
 
 
 if __name__ == '__main__':
