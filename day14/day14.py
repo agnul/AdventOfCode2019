@@ -25,26 +25,22 @@ def parse_reactions(reactions_s):
     return result
 
 
-def count_materials(reactions, available, q, p):
-    print(f'Want {q} units of {p}')
+def count_materials(available, q, p):
     if p == 'ORE':
-        print(f'Consume {q} units of ORE')
         return q
     elif available[p] >= q:
         available[p] -= q
-        print(f'Consume {q} units of {p} from available stores, {available[p]} remain')
         return 0
     else:
-        print(f'{available[p]} units in store, need to produce {q - available[p]}')
         need, available[p] = q - available[p], 0
         batches = math.ceil(need / reactions[p].quantity)
         extra = batches * reactions[p].quantity - need
         available[p] += extra
-        return sum(batches * count_materials(reactions, available, m[0], m[1]) for m in reactions[p].materials)
+        return sum(count_materials(available, batches * m[0], m[1]) for m in reactions[p].materials)
 
 
-def solve_part_1(reactions):
-    return count_materials(reactions, defaultdict(lambda: 0), 1, 'FUEL')
+def solve_part_1():
+    return count_materials(defaultdict(lambda: 0), 1, 'FUEL')
 
 
 def solve_part_2():
@@ -67,6 +63,6 @@ if __name__ == '__main__':
                    '4 C, 1 A => 1 CA',
                    '2 AB, 3 BC, 4 CA => 1 FUEL']
 
-    reactions = parse_reactions(first_test)
+    reactions = parse_reactions(open('input.txt', 'r'))
 
-    print(f'{solve_part_1(reactions)}, {solve_part_2()}')
+    print(f'{solve_part_1()}, {solve_part_2()}')
